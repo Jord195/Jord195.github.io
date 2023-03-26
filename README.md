@@ -1,3 +1,6 @@
+Please go to https://jord195.github.io/index.html to view the site
+
+
 Jobsite
 
 Installations:
