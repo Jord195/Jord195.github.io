@@ -2,7 +2,7 @@ Jobsite
 
 Installations:
 
-I have made my code install free so nothing would need to be installed on the reviewers side. I uploaded a JSON file to an online JSON bin which means that it is saved on a server where my code sends it to read from. I had some difficulty running this from on my pc and read online it needed to be hosted to be read.
+I have made my code install free so nothing would need to be installed on the reviewers side. I uploaded a JSON file to an online JSON bin which means that it is saved on a server where my code reads from. I had some difficulty running this from on my pc and read online it needed to be hosted to be read.
 
 Images are pulled from the web to make things easier for cross device editing so i dont need to download and change the paths of my code, Ideally i will move these to my own online storage as they could be removed or the link could change. Although they are all copyright free i do not control them being edited as of right now.
 
