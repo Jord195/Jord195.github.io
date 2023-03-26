@@ -246,3 +246,8 @@ body {
   font-weight: 600;
   color: #7bafe1;
 }
+
+.clear-filter:hover {
+  transform: scale(1.1);
+}
+
