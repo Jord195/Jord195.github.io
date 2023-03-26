@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="Styling.css">
+  <title>Job Listings</title>
+</head>
+<body>
+  <div class="banner">
+    <h1>Job Search</h1>
+  </div>
+
+<div id="app">
+  <div class="row">
+      <div id="search-container-container">
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Job title" v-model="searchTerm">
+    </div>
+  </div>
+    <div class="col-md-3">
+<div class="filters">
+  <div class="category-count">{{ filteredJobCount }} jobs found</div>
+  <p class="clear-filter" @click="clearCategory">Clear Filter</p>
+  <label for="category">Category:</label>
+  <div class="category-dropdown">
+    <select v-model="selectedCategory">
+      <option disabled value="">Please select a category</option>
+      <option v-for="category in categories" :value="category">{{ category }}</option>
+    </select>
+  </div>
+</div>
+    </div>
+    <div class="col-md-9">
+      <div class="sort-by">
+        <label for="sort-by-select">Sort by:</label>
+        <select id="sort-by-select" v-model="selectedSort">
+          <option disabled value="">Please select</option>
+          <option value="pay">Pay</option>
+          <option value="date">Date</option>
+        </select>
+      </div>
+      <div class="job-list">
+        <div class="job-card" v-for="job in sortedJobs" :key="job.id">
+          <h2>{{ job.job_title }}</h2>
+          <div class="details">
+            <div class="location">{{ job.location }}</div>
+            <div class="salary">£{{ job.salary_from }} - £{{ job.salary_to }}</div>
+            <div class="category">{{ job.category }}</div>
+            <div class="date">{{ job.posted_date }}</div>
+          </div>
+          <button class="apply-button">View</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="https://unpkg.com/vue@2.6.12/dist/vue.js"></script>
+<script>
+// fetch data from API
+fetch('https://api.jsonbin.io/v3/b/641da95aace6f33a22f841c0')
+  .then(response => response.json())
+  .then(data => {
+    // create Vue app
+    new Vue({
+      el: '#app',
+      data: {
+        jobs: data.record.jobs,
+        selectedCategory: '',
+        selectedSort: '',
+        searchTerm: ''
+      },
+      computed: {
+        categories() {
+          // get unique categories from jobs data
+          const categories = new Set(this.jobs.map(job => job.category));
+          return Array.from(categories);
+        },
+        filteredJobs() {
+          // filter jobs based on selected category and search term
+          if (this.selectedCategory === '') {
+            return this.jobs.filter(job => job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+          } else {
+            return this.jobs.filter(job => job.category === this.selectedCategory && job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+          }
+        },
+        filteredJobCount() {
+          return this.filteredJobs.length;
+        },
+        sortedJobs() {
+          // sort jobs based on selected sort option
+          if (this.selectedSort === 'pay') {
+            return this.filteredJobs.sort((a, b) => (a.salary_from > b.salary_from) ? 1 : -1);
+          } else if (this.selectedSort === 'date') {
+            return this.filteredJobs.sort((a, b) => (a.posted_date > b.posted_date) ? -1 : 1);
+          } else {
+            return this.filteredJobs;
+          }
+        }
+      },
+      methods: {
+        clearSearch() {
+          this.searchTerm = '';
+        },
+        clearCategory() {
+          this.selectedCategory = '';
+        }
+      }
+    })
+  })
+
+</script>
+
+
+</body>
+</html>

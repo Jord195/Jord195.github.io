@@ -1,0 +1,248 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.banner {
+  background-image: linear-gradient(to bottom, rgba(39, 166, 245, 0.61), rgba(0, 124, 201, 0.4)),
+    url(https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80);
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  color: white;
+  text-align: center;
+  padding: 50px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
+}
+
+.banner h1 {
+  font-size: 50px;
+  padding-top: 100px;
+  margin: auto;
+}
+
+.job-card {
+  box-shadow: 0px 0px 5px #ccc;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.job-card h2 {
+  margin: 0;
+}
+
+.job-card p {
+  margin: 0;
+}
+
+.job-card .description {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.job-card .details {
+  margin-top: 20px;
+  font-size: 16px;
+  justify-content: space-between;
+  align-items: left;
+  line-height: 2;
+}
+
+.job-card .details div {
+  margin-right: 20px;
+}
+
+.job-card .details .salary {
+  font-weight: bold;
+}
+
+.filters {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.filters label {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.filters .category-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.filters input[type="radio"] {
+  margin-right: 10px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-md-3, .col-md-9 {
+  position: relative;
+  width: 30%;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (max-width: 767px) {
+  #search-container {
+    justify-content: center;
+  }
+}
+  
+  .col-md-9 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+#app {
+  padding-left: 25%;
+  padding-right: 10%;
+  align-items: center;
+}
+
+.job-card button.apply-button {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  background-color: #242b62;
+  color: #FFFFFF;
+  padding: 5px;
+  font-size: 18px;
+  border-radius: 35px;
+  transition: all .2s ease-in-out;
+}
+
+.job-card button.apply-button:hover {
+  transform: scale(1.02);
+  background-color: #7bafe1;
+  border: none;
+}
+
+.category-dropdown select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 5px 30px 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.category-dropdown select::-ms-expand {
+  display: none;
+}
+
+.category-dropdown select:focus {
+  outline: none;
+  border-color: #5b9dd9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.category-dropdown select option {
+  font-size: 16px;
+}
+
+#search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  padding: 2%;
+  margin-right: 17%;
+  box-shadow: 0px 0px 5px #ccc;
+  border-radius: 20px;
+  background-color: #FFFFFF;
+}
+
+#search-input {
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  width: 100%;
+  max-width: none;
+  font-size: 17px;
+}
+
+.category-dropdown select {
+  height: 30px;
+  font-size: 14px;
+}
+
+
+.category-count {
+  text-align: center;
+  font-weight: 600;
+  font-size: 25px;
+  padding-bottom: 5px;
+}
+
+@media only screen and (max-width: 1286px) {
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .col-md-3, .col-md-9 {
+    width: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+
+#app {
+  padding-left: 0%;
+  padding-right: 0%;
+  align-items: center;
+}
+
+#search-container{
+  margin: 0%;
+}
+}
+
+
+.sort-by {
+  padding-top: 25px;
+  padding-left: 30px;
+}
+
+#search-container-container {
+  margin-top: -50px;
+  width: 100%;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+#sort-by-select {
+  border-radius: 30px;
+  padding: 3px;
+}
+
+.clear-filter {
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  font-size: 15px;
+  font-weight: 600;
+  color: #7bafe1;
+}
