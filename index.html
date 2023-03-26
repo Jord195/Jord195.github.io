@@ -21,13 +21,13 @@
     <div class="col-md-3">
 <div class="filters">
   <div class="category-count">{{ filteredJobCount }} jobs found</div>
-  <p class="clear-filter" @click="clearCategory">Clear Filter</p>
-  <label for="category">Category:</label>
-  <div class="category-dropdown">
-    <select v-model="selectedCategory">
-      <option disabled value="">Please select a category</option>
-      <option v-for="category in categories" :value="category">{{ category }}</option>
-    </select>
+<p class="clear-filter" @click="clearFilters">Clear Filters</p>
+  <label>Category:</label>
+  <div class="category-checkboxes">
+    <label v-for="category in categories" :key="category">
+      <input type="checkbox" v-model="selectedCategory" :value="category">
+      {{ category }}
+    </label>
   </div>
 </div>
     </div>
@@ -68,7 +68,7 @@ fetch('https://api.jsonbin.io/v3/b/641da95aace6f33a22f841c0')
       el: '#app',
       data: {
         jobs: data.record.jobs,
-        selectedCategory: '',
+        selectedCategory: [],
         selectedSort: '',
         searchTerm: ''
       },
@@ -79,12 +79,18 @@ fetch('https://api.jsonbin.io/v3/b/641da95aace6f33a22f841c0')
           return Array.from(categories);
         },
         filteredJobs() {
-          // filter jobs based on selected category and search term
-          if (this.selectedCategory === '') {
-            return this.jobs.filter(job => job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase()));
-          } else {
-            return this.jobs.filter(job => job.category === this.selectedCategory && job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+          // filter jobs based on selected categories and search term
+          let filteredJobs = this.jobs;
+
+          if (this.selectedCategory.length > 0) {
+            filteredJobs = filteredJobs.filter(job => this.selectedCategory.includes(job.category));
           }
+
+          if (this.searchTerm) {
+            filteredJobs = filteredJobs.filter(job => job.job_title.toLowerCase().includes(this.searchTerm.toLowerCase()));
+          }
+
+          return filteredJobs;
         },
         filteredJobCount() {
           return this.filteredJobs.length;
@@ -92,7 +98,7 @@ fetch('https://api.jsonbin.io/v3/b/641da95aace6f33a22f841c0')
         sortedJobs() {
           // sort jobs based on selected sort option
           if (this.selectedSort === 'pay') {
-            return this.filteredJobs.sort((a, b) => (a.salary_from > b.salary_from) ? 1 : -1);
+            return this.filteredJobs.sort((a, b) => (b.salary_from > a.salary_from) ? 1 : -1);
           } else if (this.selectedSort === 'date') {
             return this.filteredJobs.sort((a, b) => (a.posted_date > b.posted_date) ? -1 : 1);
           } else {
@@ -101,18 +107,21 @@ fetch('https://api.jsonbin.io/v3/b/641da95aace6f33a22f841c0')
         }
       },
       methods: {
-        clearSearch() {
-          this.searchTerm = '';
-        },
-        clearCategory() {
-          this.selectedCategory = '';
-        }
-      }
+  clearFilters() {
+    this.clearSearch();
+    this.clearCategory();
+  },
+  clearSearch() {
+    this.searchTerm = '';
+  },
+  clearCategory() {
+    this.selectedCategory = [];
+  }
+}
+
     })
   })
 
 </script>
-
-
 </body>
 </html>
